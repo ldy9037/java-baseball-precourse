@@ -2,6 +2,8 @@ package study;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
@@ -31,4 +33,17 @@ public class StringTest {
         assertThat(splitedOne).containsOnly("1");
 
     }
-}
+
+    @Test
+    @DisplayName("String (1,2)를 1부터 4까지 subString 했을 때 1,2가 반환된다.")
+    void substringTo4From1() {
+        // given 
+        String OneAndTwo = "(1,2)";
+        
+        // when
+        String subStringOneAndTwo = OneAndTwo.substring(1, 4);
+
+        // then 
+        assertThat(subStringOneAndTwo).isEqualTo("1,2");
+    }
+}   
