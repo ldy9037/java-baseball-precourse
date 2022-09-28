@@ -61,4 +61,19 @@ public class StringTest {
         // then
         assertThat(character).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("charAt() 사용 시 위치 값을 벗어나면 에러가 발생한다.")
+    void charAtWithOutOfBounds() {
+        // given
+        String abc = "abc";
+        
+        // when
+        int index = abc.length();
+        
+        // then
+        assertThatExceptionOfType(StringIndexOutOfBoundsException.class)
+                .isThrownBy(() -> abc.charAt(index))
+                .withMessageMatching("String index out of range: \\d+");
+    }
 }   
