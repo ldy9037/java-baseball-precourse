@@ -3,6 +3,7 @@ package study;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -45,5 +46,19 @@ public class StringTest {
 
         // then 
         assertThat(subStringOneAndTwo).isEqualTo("1,2");
+    }
+
+    @ParameterizedTest(name = "index: {0}, expected: {1}")
+    @CsvSource(value = {"1:b", "2:c", "0:a"}, delimiter = ':')
+    @DisplayName("charAt()을 String abc의 특정 위치 문자를 가져온다.")
+    void charAt(int index, char expected) {
+        // given
+        String abc = "abc";
+
+        // when
+        char character = abc.charAt(index);
+
+        // then
+        assertThat(character).isEqualTo(expected);
     }
 }   
