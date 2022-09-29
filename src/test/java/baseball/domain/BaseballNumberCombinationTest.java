@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class BaseballNumberCombinationTest {
     
@@ -16,10 +18,7 @@ public class BaseballNumberCombinationTest {
 
     @BeforeEach
     void setUp() {
-        baseballNumbers = new ArrayList<>();
-        baseballNumbers.add(new BaseballNumber(1));
-        baseballNumbers.add(new BaseballNumber(2));
-        baseballNumbers.add(new BaseballNumber(3));
+        baseballNumbers = generateBaseballNumberList(BaseballNumberCombination.NUMBER_SIZE);
     }
 
     @Test
@@ -44,5 +43,28 @@ public class BaseballNumberCombinationTest {
                 .isThrownBy(() -> new BaseballNumberCombination(baseballNumbers))
                 .withMessageMatching(
                         ErrorMessage.BASEBALL_NUMBER_DUPLICATE_ERROR.getMessage());
+    }
+
+    @ParameterizedTest(name = "size: {arguments}")
+    @ValueSource(ints = {BaseballNumberCombination.NUMBER_SIZE - 1, BaseballNumberCombination.NUMBER_SIZE + 1})
+    @DisplayName("잘못된 크기의 숫자 조합을 생성하면 에러가 발생한다.")
+    void validate_worngNumberSize_exception(int size) {
+        // when
+        List<BaseballNumber> worngSizeList = generateBaseballNumberList(size);
+
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new BaseballNumberCombination(worngSizeList))
+                .withMessageMatching("숫자는 %d자리 조합만 허용됩니다.".replace("%d", "\\d+"));
+    }
+
+    private List<BaseballNumber> generateBaseballNumberList(int size) {
+        List<BaseballNumber> result = new ArrayList<>();
+
+        for (int i = 1; i <= size; i++) {
+            result.add(new BaseballNumber(i));
+        }
+
+        return result;
     }
 }
