@@ -1,6 +1,7 @@
 package baseball.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +31,18 @@ public class BaseballNumberCombinationTest {
         // then
         assertThat(baseballNumberCombination.getNumber(1))
                 .isEqualTo(baseballNumbers.get(1));
+    }
+
+    @Test
+    @DisplayName("중복된 숫자가 존재할 경우 에러가 발생한다.")
+    void validate_duplicateNumber_exception() {
+        // when 
+        baseballNumbers.set(1,baseballNumbers.get(0));
+        
+        // then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new BaseballNumberCombination(baseballNumbers))
+                .withMessageMatching(
+                        ErrorMessage.BASEBALL_NUMBER_DUPLICATE_ERROR.getMessage());
     }
 }
