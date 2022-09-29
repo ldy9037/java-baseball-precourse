@@ -1,10 +1,12 @@
 package baseball.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class BaseballNumberTest {
     
@@ -19,5 +21,16 @@ public class BaseballNumberTest {
         // then
         assertThat(baseballNumberFromNumber1.equals(baseballNumberFromNumber2))
                 .isEqualTo(expected);
+    }
+
+    @ParameterizedTest(name = "number: {arguments}")
+    @ValueSource(ints = {BaseballNumber.MAXIUM_NUMBER + 1, BaseballNumber.MINIMUM_NUMBER - 1})
+    @DisplayName("지정된 범위 밖의 값으로 객체를 생성할 경우 에러를 반환한다.")
+    void new_outOfRange_exception(int number) {
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> new BaseballNumber(number))
+                .withMessageMatching(
+                        ErrorMessage.BASEBALL_NUMBER_OUT_OF_RANGE_ERROR.getMessage().replace("%d", "\\d+"));
     }
 }
