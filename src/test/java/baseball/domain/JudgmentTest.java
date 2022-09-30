@@ -24,6 +24,19 @@ public class JudgmentTest {
         assertThat(strikeJudgment.getCount()).isEqualTo(expected);    
     }
 
+    @ParameterizedTest(name = "computer: {0}, player: {1}, expected: {2}")
+    @CsvSource(value = {"123:231:3", "812:142:1", "123:123:0"}, delimiter = ':')
+    @DisplayName("다른 자리에 같은 숫자가 존재하면 볼 카운트를 증가시킨다.")
+    void new_ballJudgment(String combination1, String combination2, int expected){
+        // when
+        Judgment ballJudgment = BallJudgment.of(
+                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
+                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+        
+        // then
+        assertThat(ballJudgment.getCount()).isEqualTo(expected);    
+    }
+
     private List<BaseballNumber> generateBaseballNumberList(String combination) {
         List<BaseballNumber> baseballNumbers = new ArrayList<>();
 
