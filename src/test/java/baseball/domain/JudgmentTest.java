@@ -37,6 +37,19 @@ public class JudgmentTest {
         assertThat(ballJudgment.getCount()).isEqualTo(expected);    
     }
 
+    @ParameterizedTest(name = "computer: {0}, player: {1}, expected: {2}")
+    @CsvSource(value = {"123:231:0", "812:142:1", "123:456:3"}, delimiter = ':')
+    @DisplayName("위치 상관없이 같은 숫자가 존재하지 않으면 낫싱 카운트를 증가시킨다.")
+    void new_nothingJudgment(String combination1, String combination2, int expected){
+        // when
+        Judgment nothingJudgment = NothingJudgment.of(
+                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
+                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+        
+        // then
+        assertThat(nothingJudgment.getCount()).isEqualTo(expected);    
+    }
+
     private List<BaseballNumber> generateBaseballNumberList(String combination) {
         List<BaseballNumber> baseballNumbers = new ArrayList<>();
 

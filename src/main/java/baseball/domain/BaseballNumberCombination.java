@@ -39,4 +39,8 @@ public class BaseballNumberCombination {
     public BaseballNumber getNumber(int index) {
         return baseballNumbers.get(index);
     }
+
+    public boolean contains(BaseballNumber baseballNumber) {
+        return baseballNumbers.contains(baseballNumber);
+    }
 }
