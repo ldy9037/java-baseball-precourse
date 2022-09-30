@@ -1,5 +1,6 @@
 package baseball.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,5 +43,16 @@ public class BaseballNumberCombination {
 
     public boolean contains(BaseballNumber baseballNumber) {
         return baseballNumbers.contains(baseballNumber);
+    }
+
+    public List<BaseballNumber> exceptFor(int index) {
+        List<BaseballNumber> result = new ArrayList<>();
+        
+        for (BaseballNumber baseballNumber : baseballNumbers) {
+            result.add(baseballNumber);
+        }
+
+        result.remove(index);
+        return result;
     }
 }
