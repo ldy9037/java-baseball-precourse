@@ -8,6 +8,7 @@ public class StrikeJudgment implements Judgment{
         this.count = count;
     }
 
+    @Override
     public int getCount() {
         return count;
     }
