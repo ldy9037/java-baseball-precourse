@@ -11,9 +11,23 @@ public class BaseballNumberCombination {
 
     private final List<BaseballNumber> baseballNumbers;
 
-    BaseballNumberCombination(List<BaseballNumber> baseballNumbers) {
+    private BaseballNumberCombination(List<BaseballNumber> baseballNumbers) {
         validate(baseballNumbers);
         this.baseballNumbers = baseballNumbers;
+    }
+
+    public static BaseballNumberCombination of(List<BaseballNumber> baseballNumbers) {
+        return new BaseballNumberCombination(baseballNumbers);
+    }
+
+    public static BaseballNumberCombination from(String baseNumbers) {
+        List<BaseballNumber> baseballNumberList = new ArrayList<>();
+
+        for (char number : baseNumbers.toCharArray()) {
+            baseballNumberList.add(new BaseballNumber(Character.getNumericValue(number)));
+        }
+
+        return new BaseballNumberCombination(baseballNumberList);
     }
 
     private void validate(List<BaseballNumber> baseballNumbers) {

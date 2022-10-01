@@ -25,7 +25,7 @@ public class BaseballNumberCombinationTest {
     @DisplayName("숫자 조합을 생성한다.")
     void new_baseballNumberCombination() {
         // when
-        BaseballNumberCombination baseballNumberCombination = new BaseballNumberCombination(baseballNumbers);
+        BaseballNumberCombination baseballNumberCombination = BaseballNumberCombination.of(baseballNumbers);
         
         // then
         assertThat(baseballNumberCombination.getNumber(1))
@@ -40,7 +40,7 @@ public class BaseballNumberCombinationTest {
         
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new BaseballNumberCombination(baseballNumbers))
+                .isThrownBy(() -> BaseballNumberCombination.of(baseballNumbers))
                 .withMessageMatching(
                         ErrorMessage.BASEBALL_NUMBER_DUPLICATE_ERROR.getMessage());
     }
@@ -54,7 +54,7 @@ public class BaseballNumberCombinationTest {
 
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new BaseballNumberCombination(worngSizeList))
+                .isThrownBy(() -> BaseballNumberCombination.of(worngSizeList))
                 .withMessageMatching("숫자는 %d자리 조합만 허용됩니다.".replace("%d", "\\d+"));
     }
 

@@ -2,9 +2,6 @@ package baseball.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,8 +14,8 @@ public class JudgmentTest {
     void new_strikeJudgment(String combination1, String combination2, int expected){
         // when
         Judgment strikeJudgment = new StrikeJudgment(
-                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
-                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+            BaseballNumberCombination.from(combination1),
+            BaseballNumberCombination.from(combination2));
         
         // then
         assertThat(strikeJudgment.getCount()).isEqualTo(expected);    
@@ -30,8 +27,8 @@ public class JudgmentTest {
     void new_ballJudgment(String combination1, String combination2, int expected){
         // when
         Judgment ballJudgment = new BallJudgment(
-                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
-                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+            BaseballNumberCombination.from(combination1),
+            BaseballNumberCombination.from(combination2));
         
         // then
         assertThat(ballJudgment.getCount()).isEqualTo(expected);    
@@ -43,8 +40,8 @@ public class JudgmentTest {
     void new_nothingJudgment(String combination1, String combination2, int expected){
         // when
         Judgment nothingJudgment = new NothingJudgment(
-                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
-                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+            BaseballNumberCombination.from(combination1),
+            BaseballNumberCombination.from(combination2));
         
         // then
         assertThat(nothingJudgment.getCount()).isEqualTo(expected);    
@@ -56,8 +53,8 @@ public class JudgmentTest {
     void getResult_strikeJudgment_string(String combination1, String combination2, String expected){
         // when
         Judgment strikeJudgment = new StrikeJudgment(
-                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
-                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+            BaseballNumberCombination.from(combination1),
+            BaseballNumberCombination.from(combination2));
         
         // then
         assertThat(strikeJudgment.getResult()).isEqualTo(expected);    
@@ -69,8 +66,8 @@ public class JudgmentTest {
     void getResult_ballJudgment_string(String combination1, String combination2, String expected){
         // when
         Judgment ballJudgment = new BallJudgment(
-                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
-                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+            BaseballNumberCombination.from(combination1),
+            BaseballNumberCombination.from(combination2));
         
         // then
         assertThat(ballJudgment.getResult()).isEqualTo(expected);    
@@ -82,21 +79,10 @@ public class JudgmentTest {
     void getResult_nothingJudgment_string(String combination1, String combination2, String expected){
         // when
         Judgment nothingJudgment = new NothingJudgment(
-                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
-                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+                BaseballNumberCombination.from(combination1),
+                BaseballNumberCombination.from(combination2));
         
         // then
         assertThat(nothingJudgment.getResult()).isEqualTo(expected);    
     }
-
-    private List<BaseballNumber> generateBaseballNumberList(String combination) {
-        List<BaseballNumber> baseballNumbers = new ArrayList<>();
-
-        for (char number : combination.toCharArray()) {
-            baseballNumbers.add(new BaseballNumber(Character.getNumericValue(number)));
-        }
-
-        return baseballNumbers;
-    }
-
 }
