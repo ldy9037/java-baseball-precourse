@@ -1,7 +1,9 @@
 package baseball.controller;
 
+import baseball.domain.BaseballNumbers;
 import baseball.domain.Game;
 import baseball.domain.GameStatus;
+import baseball.view.MainView;
 
 public class MainController {
     
@@ -12,10 +14,14 @@ public class MainController {
 
         game = new Game();
 
-        getBaseballNumbersInput();
+        requestBaseballNumbersForm();
     }
 
-    private void getBaseballNumbersInput() {
+    private void requestBaseballNumbersForm() {
+        requestHint(MainView.baseballNumbersForm());
+    }
+
+    private void requestHint(BaseballNumbers playerNumbers) {
     }
 
     private void startValidate() {
@@ -26,6 +32,10 @@ public class MainController {
     }
 
     private boolean isInProgress() {
-        return (game != null && game.getStatus() == GameStatus.IN_PROGRESS);
+        return (!isNull() && game.getStatus() == GameStatus.IN_PROGRESS);
     }
+
+    private boolean isNull() {
+        return (game == null);
+    }   
 }
