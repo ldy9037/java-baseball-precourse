@@ -2,28 +2,23 @@ package baseball.domain;
 
 public class StrikeJudgment implements Judgment{
     
-    private final int count;
+    private final BaseballNumberCombination computerCombination;
+    private final BaseballNumberCombination playerCombination;
     
-    private StrikeJudgment(int count) {
-        this.count = count;
+    StrikeJudgment(
+        BaseballNumberCombination computerCombination, 
+        BaseballNumberCombination playerCombination
+    ) {
+        this.computerCombination = computerCombination;
+        this.playerCombination = playerCombination;
     }
 
     @Override
     public int getCount() {
-        return count;
+        return judge();
     }
 
-    public static StrikeJudgment of(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        return new StrikeJudgment(judge(computerCombination, playerCombination));
-    }
-
-    private static int judge(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) { 
+    private int judge() { 
         int result = 0;
 
         for (int i = 0; i < BaseballNumberCombination.NUMBER_SIZE; i++) {
@@ -33,10 +28,7 @@ public class StrikeJudgment implements Judgment{
         return result;
     }
     
-    private static int compare(
-        BaseballNumber computerNumber,
-        BaseballNumber playerNumber
-    ) {
+    private static int compare(BaseballNumber computerNumber,BaseballNumber playerNumber) {
         return (computerNumber.equals(playerNumber)) ? 1 : 0;
     }
 }

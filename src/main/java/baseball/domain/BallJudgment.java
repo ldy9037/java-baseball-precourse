@@ -4,28 +4,23 @@ import java.util.List;
 
 public class BallJudgment implements Judgment {
     
-    private final int count;
+    private final BaseballNumberCombination computerCombination;
+    private final BaseballNumberCombination playerCombination;
     
-    private BallJudgment(int count) {
-        this.count = count;
+    BallJudgment(
+        BaseballNumberCombination computerCombination, 
+        BaseballNumberCombination playerCombination
+    ) {
+        this.computerCombination = computerCombination;
+        this.playerCombination = playerCombination;
     }
 
     @Override
     public int getCount() {
-        return count;
+        return judge();
     }
 
-    public static BallJudgment of(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        return new BallJudgment(judge(computerCombination, playerCombination));
-    }
-
-    private static int judge(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) { 
+    private int judge() { 
         int result = 0;
 
         for (int i = 0; i < BaseballNumberCombination.NUMBER_SIZE; i++) {
@@ -35,10 +30,7 @@ public class BallJudgment implements Judgment {
         return result;
     }
     
-    private static int findBall(
-        BaseballNumber computerNumber,
-        List<BaseballNumber> playerCombination
-    ) {
+    private int findBall(BaseballNumber computerNumber, List<BaseballNumber> playerCombination) {
         return (playerCombination.contains(computerNumber)) ? 1 : 0;
     }
 }

@@ -2,28 +2,23 @@ package baseball.domain;
 
 public class NothingJudgment implements Judgment{
     
-    private final int count;
+    private final BaseballNumberCombination computerCombination;
+    private final BaseballNumberCombination playerCombination;
 
-    private NothingJudgment(int count) {
-        this.count = count;
+    NothingJudgment(
+        BaseballNumberCombination computerCombination, 
+        BaseballNumberCombination playerCombination
+    ) {
+        this.computerCombination = computerCombination;
+        this.playerCombination = playerCombination;
     }
 
     @Override
     public int getCount() {
-        return count;
+        return judge();
     }
 
-    public static NothingJudgment of(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        return new NothingJudgment(judge(computerCombination, playerCombination));
-    }
-
-    private static int judge(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) { 
+    private int judge() { 
         int result = 0;
 
         for (int i = 0; i < BaseballNumberCombination.NUMBER_SIZE; i++) {
@@ -33,7 +28,7 @@ public class NothingJudgment implements Judgment{
         return result;
     }
     
-    private static int contains(
+    private int contains(
         BaseballNumber computerNumber,
         BaseballNumberCombination playerCombination
     ) {

@@ -16,7 +16,7 @@ public class JudgmentTest {
     @DisplayName("같은 자리에 같은 숫자가 존재하면 스트라이크 카운트를 증가시킨다.")
     void new_strikeJudgment(String combination1, String combination2, int expected){
         // when
-        Judgment strikeJudgment = StrikeJudgment.of(
+        Judgment strikeJudgment = new StrikeJudgment(
                 new BaseballNumberCombination(generateBaseballNumberList(combination1)),
                 new BaseballNumberCombination(generateBaseballNumberList(combination2)));
         
@@ -29,7 +29,7 @@ public class JudgmentTest {
     @DisplayName("다른 자리에 같은 숫자가 존재하면 볼 카운트를 증가시킨다.")
     void new_ballJudgment(String combination1, String combination2, int expected){
         // when
-        Judgment ballJudgment = BallJudgment.of(
+        Judgment ballJudgment = new BallJudgment(
                 new BaseballNumberCombination(generateBaseballNumberList(combination1)),
                 new BaseballNumberCombination(generateBaseballNumberList(combination2)));
         
@@ -42,7 +42,7 @@ public class JudgmentTest {
     @DisplayName("위치 상관없이 같은 숫자가 존재하지 않으면 낫싱 카운트를 증가시킨다.")
     void new_nothingJudgment(String combination1, String combination2, int expected){
         // when
-        Judgment nothingJudgment = NothingJudgment.of(
+        Judgment nothingJudgment = new NothingJudgment(
                 new BaseballNumberCombination(generateBaseballNumberList(combination1)),
                 new BaseballNumberCombination(generateBaseballNumberList(combination2)));
         
