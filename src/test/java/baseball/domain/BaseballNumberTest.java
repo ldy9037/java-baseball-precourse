@@ -15,11 +15,11 @@ public class BaseballNumberTest {
     @DisplayName("같은 값을 가진 두 BaseballNumber 객체를 비교한다.")
     void equals_baseballNumber_boolean(int number1, int number2, boolean expected) {        
         // when
-        BaseballNumber baseballNumberFromNumber1 = new BaseballNumber(number1);
-        BaseballNumber baseballNumberFromNumber2 = new BaseballNumber(number2);
+        BaseballNumber baseballNumber1 = new BaseballNumber(number1);
+        BaseballNumber baseballNumber2 = new BaseballNumber(number2);
         
         // then
-        assertThat(baseballNumberFromNumber1.equals(baseballNumberFromNumber2))
+        assertThat(baseballNumber1.equals(baseballNumber2))
                 .isEqualTo(expected);
     }
 

@@ -4,15 +4,12 @@ public class StrikeJudgment implements Judgment{
     
     private final String judgmentName = "스트라이크";
 
-    private final BaseballNumberCombination computerCombination;
-    private final BaseballNumberCombination playerCombination;
+    private final BaseballNumbers computerNumbers;
+    private final BaseballNumbers playerNumbers;
     
-    StrikeJudgment(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        this.computerCombination = computerCombination;
-        this.playerCombination = playerCombination;
+    StrikeJudgment(BaseballNumbers computerNumbers, BaseballNumbers playerNumbers) {
+        this.computerNumbers = computerNumbers;
+        this.playerNumbers = playerNumbers;
     }
 
     @Override
@@ -32,14 +29,14 @@ public class StrikeJudgment implements Judgment{
     private int judge() { 
         int result = 0;
 
-        for (int i = 0; i < BaseballNumberCombination.NUMBER_SIZE; i++) {
-            result += compare(computerCombination.getNumber(i), playerCombination.getNumber(i));
+        for (int i = 0; i < BaseballNumbers.NUMBER_SIZE; i++) {
+            result += compare(computerNumbers.getNumber(i), playerNumbers.getNumber(i));
         }
 
         return result;
     }
     
-    private static int compare(BaseballNumber computerNumber,BaseballNumber playerNumber) {
+    private static int compare(BaseballNumber computerNumber, BaseballNumber playerNumber) {
         return (computerNumber.equals(playerNumber)) ? 1 : 0;
     }
 }

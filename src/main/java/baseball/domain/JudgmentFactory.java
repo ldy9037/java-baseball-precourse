@@ -5,15 +5,12 @@ import java.util.List;
 
 public class JudgmentFactory {
         
-    public static List<Judgment> newJudgments(
-        BaseballNumberCombination computerCombination,
-        BaseballNumberCombination playerCombination
-    ) {
+    public static List<Judgment> newJudgments(BaseballNumbers computerNumbers, BaseballNumbers playerNumbers) {
         List<Judgment> result = new ArrayList<>();
         
-        result.add(new BallJudgment(computerCombination, playerCombination));
-        result.add(new StrikeJudgment(computerCombination, playerCombination));
-        result.add(new NothingJudgment(computerCombination, playerCombination));
+        result.add(new BallJudgment(computerNumbers, playerNumbers));
+        result.add(new StrikeJudgment(computerNumbers, playerNumbers));
+        result.add(new NothingJudgment(computerNumbers, playerNumbers));
         
         return result;
     }

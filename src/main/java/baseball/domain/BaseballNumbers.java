@@ -5,29 +5,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class BaseballNumberCombination {
+public class BaseballNumbers {
     
     public static final int NUMBER_SIZE = 3;
 
     private final List<BaseballNumber> baseballNumbers;
 
-    private BaseballNumberCombination(List<BaseballNumber> baseballNumbers) {
+    private BaseballNumbers(List<BaseballNumber> baseballNumbers) {
         validate(baseballNumbers);
         this.baseballNumbers = baseballNumbers;
     }
 
-    public static BaseballNumberCombination of(List<BaseballNumber> baseballNumbers) {
-        return new BaseballNumberCombination(baseballNumbers);
+    public static BaseballNumbers of(List<BaseballNumber> baseballNumbers) {
+        return new BaseballNumbers(baseballNumbers);
     }
 
-    public static BaseballNumberCombination from(String baseNumbers) {
+    public static BaseballNumbers from(String baseNumbers) {
         List<BaseballNumber> baseballNumberList = new ArrayList<>();
 
         for (char number : baseNumbers.toCharArray()) {
             baseballNumberList.add(new BaseballNumber(Character.getNumericValue(number)));
         }
 
-        return new BaseballNumberCombination(baseballNumberList);
+        return new BaseballNumbers(baseballNumberList);
     }
 
     private void validate(List<BaseballNumber> baseballNumbers) {

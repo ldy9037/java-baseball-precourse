@@ -12,41 +12,41 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class BaseballNumberCombinationTest {
+public class BaseballNumbersTest {
     
-    private List<BaseballNumber> baseballNumbers;
+    private List<BaseballNumber> baseballNumberList;
 
     @BeforeEach
     void setUp() {
-        baseballNumbers = generateBaseballNumberList(BaseballNumberCombination.NUMBER_SIZE);
+        baseballNumberList = generateBaseballNumberList(BaseballNumbers.NUMBER_SIZE);
     }
 
     @Test
     @DisplayName("숫자 조합을 생성한다.")
-    void new_baseballNumberCombination() {
+    void new_baseballNumbers() {
         // when
-        BaseballNumberCombination baseballNumberCombination = BaseballNumberCombination.of(baseballNumbers);
+        BaseballNumbers baseballNumbers = BaseballNumbers.of(baseballNumberList);
         
         // then
-        assertThat(baseballNumberCombination.getNumber(1))
-                .isEqualTo(baseballNumbers.get(1));
+        assertThat(baseballNumbers.getNumber(1))
+                .isEqualTo(baseballNumberList.get(1));
     }
 
     @Test
     @DisplayName("중복된 숫자가 존재할 경우 에러가 발생한다.")
     void validate_duplicateNumber_exception() {
         // when 
-        baseballNumbers.set(1,baseballNumbers.get(0));
+        baseballNumberList.set(1,baseballNumberList.get(0));
         
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> BaseballNumberCombination.of(baseballNumbers))
+                .isThrownBy(() -> BaseballNumbers.of(baseballNumberList))
                 .withMessageMatching(
                         ErrorMessage.BASEBALL_NUMBER_DUPLICATE_ERROR.getMessage());
     }
 
     @ParameterizedTest(name = "size: {arguments}")
-    @ValueSource(ints = {BaseballNumberCombination.NUMBER_SIZE - 1, BaseballNumberCombination.NUMBER_SIZE + 1})
+    @ValueSource(ints = {BaseballNumbers.NUMBER_SIZE - 1, BaseballNumbers.NUMBER_SIZE + 1})
     @DisplayName("잘못된 크기의 숫자 조합을 생성하면 에러가 발생한다.")
     void validate_worngNumberSize_exception(int size) {
         // when
@@ -54,7 +54,7 @@ public class BaseballNumberCombinationTest {
 
         // then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> BaseballNumberCombination.of(worngSizeList))
+                .isThrownBy(() -> BaseballNumbers.of(worngSizeList))
                 .withMessageMatching("숫자는 %d자리 조합만 허용됩니다.".replace("%d", "\\d+"));
     }
 

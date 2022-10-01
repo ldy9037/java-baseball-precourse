@@ -11,11 +11,8 @@ public class Hint {
         this.judgments = judgments;
     }
 
-    public static Hint of(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        List<Judgment> judgments = JudgmentFactory.newJudgments(computerCombination, playerCombination);
+    public static Hint of(BaseballNumbers computerNumbers, BaseballNumbers playerNumbers) {
+        List<Judgment> judgments = JudgmentFactory.newJudgments(computerNumbers, playerNumbers);
         return new Hint(judgments);
     }
 

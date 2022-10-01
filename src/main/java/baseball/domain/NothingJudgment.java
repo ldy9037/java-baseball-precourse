@@ -4,15 +4,12 @@ public class NothingJudgment implements Judgment{
     
     private final String judgmentName = "낫싱";
 
-    private final BaseballNumberCombination computerCombination;
-    private final BaseballNumberCombination playerCombination;
+    private final BaseballNumbers computerNumbers;
+    private final BaseballNumbers playerNumbers;
 
-    NothingJudgment(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        this.computerCombination = computerCombination;
-        this.playerCombination = playerCombination;
+    NothingJudgment(BaseballNumbers computerNumbers, BaseballNumbers playerNumbers) {
+        this.computerNumbers = computerNumbers;
+        this.playerNumbers = playerNumbers;
     }
 
     @Override
@@ -22,7 +19,7 @@ public class NothingJudgment implements Judgment{
 
     @Override
     public String getResult() {
-        if (getCount() == BaseballNumberCombination.NUMBER_SIZE) {
+        if (getCount() == BaseballNumbers.NUMBER_SIZE) {
             return judgmentName;
         }
         
@@ -32,17 +29,14 @@ public class NothingJudgment implements Judgment{
     private int judge() { 
         int result = 0;
 
-        for (int i = 0; i < BaseballNumberCombination.NUMBER_SIZE; i++) {
-            result += contains(computerCombination.getNumber(i), playerCombination);
+        for (int i = 0; i < BaseballNumbers.NUMBER_SIZE; i++) {
+            result += contains(computerNumbers.getNumber(i), playerNumbers);
         }
 
         return result;
     }
     
-    private int contains(
-        BaseballNumber computerNumber,
-        BaseballNumberCombination playerCombination
-    ) {
-        return (!playerCombination.contains(computerNumber)) ? 1 : 0;
+    private int contains(BaseballNumber computerNumber, BaseballNumbers playerNumbers) {
+        return (!playerNumbers.contains(computerNumber)) ? 1 : 0;
     }
 }

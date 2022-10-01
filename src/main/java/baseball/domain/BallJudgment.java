@@ -6,15 +6,12 @@ public class BallJudgment implements Judgment {
     
     private final String judgmentName = "볼";
 
-    private final BaseballNumberCombination computerCombination;
-    private final BaseballNumberCombination playerCombination;
+    private final BaseballNumbers computerNumbers;
+    private final BaseballNumbers playerNumbers;
     
-    BallJudgment(
-        BaseballNumberCombination computerCombination, 
-        BaseballNumberCombination playerCombination
-    ) {
-        this.computerCombination = computerCombination;
-        this.playerCombination = playerCombination;
+    BallJudgment(BaseballNumbers computerNumbers, BaseballNumbers playerNumbers) {
+        this.computerNumbers = computerNumbers;
+        this.playerNumbers = playerNumbers;
     }
 
     @Override
@@ -34,14 +31,14 @@ public class BallJudgment implements Judgment {
     private int judge() { 
         int result = 0;
 
-        for (int i = 0; i < BaseballNumberCombination.NUMBER_SIZE; i++) {
-            result += findBall(computerCombination.getNumber(i), playerCombination.exceptFor(i));
+        for (int i = 0; i < BaseballNumbers.NUMBER_SIZE; i++) {
+            result += findBall(computerNumbers.getNumber(i), playerNumbers.exceptFor(i));
         }
 
         return result;
     }
     
-    private int findBall(BaseballNumber computerNumber, List<BaseballNumber> playerCombination) {
-        return (playerCombination.contains(computerNumber)) ? 1 : 0;
+    private int findBall(BaseballNumber computerNumber, List<BaseballNumber> playerNumbers) {
+        return (playerNumbers.contains(computerNumber)) ? 1 : 0;
     }
 }

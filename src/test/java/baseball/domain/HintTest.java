@@ -11,11 +11,9 @@ public class HintTest {
     @ParameterizedTest(name = "computer: {0}, player: {1}, expected: {2}")
     @CsvSource(value = {"123:123:3스트라이크", "123:134:1볼 1스트라이크", "123:456:낫싱"}, delimiter = ':')
     @DisplayName("전체 결과를 확인한다.")
-    void getMessage_string(String combination1, String combination2, String expected) {
+    void getMessage_string(String numbers1, String numbers2, String expected) {
         // when         
-        Hint hint = Hint.of(
-            BaseballNumberCombination.from(combination1), 
-            BaseballNumberCombination.from(combination2));
+        Hint hint = Hint.of(BaseballNumbers.from(numbers1), BaseballNumbers.from(numbers2));
 
         // then 
         assertThat(hint.getMessage()).isEqualTo(expected);
