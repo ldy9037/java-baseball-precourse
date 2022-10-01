@@ -4,6 +4,8 @@ import java.util.List;
 
 public class BallJudgment implements Judgment {
     
+    private final String judgmentName = "볼";
+
     private final BaseballNumberCombination computerCombination;
     private final BaseballNumberCombination playerCombination;
     
@@ -18,6 +20,15 @@ public class BallJudgment implements Judgment {
     @Override
     public int getCount() {
         return judge();
+    }
+
+    @Override
+    public String getResult() {    
+        if (getCount() == 0) {
+            return "";
+        }
+
+        return String.format("%d%s", getCount(), judgmentName);
     }
 
     private int judge() { 

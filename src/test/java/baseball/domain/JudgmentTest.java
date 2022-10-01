@@ -50,6 +50,45 @@ public class JudgmentTest {
         assertThat(nothingJudgment.getCount()).isEqualTo(expected);    
     }
 
+    @ParameterizedTest(name = "computer: {0}, player: {1}, expected: {2}")
+    @CsvSource(value = {"123:123:3스트라이크", "123:124:2스트라이크", "123:145:1스트라이크", "123:456:''"}, delimiter = ':')
+    @DisplayName("스트라이크 판정 결과를 반환한다.")
+    void getResult_strikeJudgment_string(String combination1, String combination2, String expected){
+        // when
+        Judgment strikeJudgment = new StrikeJudgment(
+                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
+                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+        
+        // then
+        assertThat(strikeJudgment.getResult()).isEqualTo(expected);    
+    }
+
+    @ParameterizedTest(name = "computer: {0}, player: {1}, expected: {2}")
+    @CsvSource(value = {"123:231:3볼", "123:234:2볼", "123:245:1볼", "123:456:''"}, delimiter = ':')
+    @DisplayName("볼 판정 결과를 반환한다.")
+    void getResult_ballJudgment_string(String combination1, String combination2, String expected){
+        // when
+        Judgment ballJudgment = new BallJudgment(
+                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
+                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+        
+        // then
+        assertThat(ballJudgment.getResult()).isEqualTo(expected);    
+    }
+
+    @ParameterizedTest(name = "computer: {0}, player: {1}, expected: {2}")
+    @CsvSource(value = {"123:123:''", "123:124:''", "123:145:''", "123:456:낫싱"}, delimiter = ':')
+    @DisplayName("낫싱 판정 결과를 반환한다.")
+    void getResult_nothingJudgment_string(String combination1, String combination2, String expected){
+        // when
+        Judgment nothingJudgment = new NothingJudgment(
+                new BaseballNumberCombination(generateBaseballNumberList(combination1)),
+                new BaseballNumberCombination(generateBaseballNumberList(combination2)));
+        
+        // then
+        assertThat(nothingJudgment.getResult()).isEqualTo(expected);    
+    }
+
     private List<BaseballNumber> generateBaseballNumberList(String combination) {
         List<BaseballNumber> baseballNumbers = new ArrayList<>();
 

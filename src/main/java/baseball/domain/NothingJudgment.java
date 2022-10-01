@@ -2,6 +2,8 @@ package baseball.domain;
 
 public class NothingJudgment implements Judgment{
     
+    private final String judgmentName = "낫싱";
+
     private final BaseballNumberCombination computerCombination;
     private final BaseballNumberCombination playerCombination;
 
@@ -16,6 +18,15 @@ public class NothingJudgment implements Judgment{
     @Override
     public int getCount() {
         return judge();
+    }
+
+    @Override
+    public String getResult() {
+        if (getCount() == BaseballNumberCombination.NUMBER_SIZE) {
+            return judgmentName;
+        }
+        
+        return "";
     }
 
     private int judge() { 
