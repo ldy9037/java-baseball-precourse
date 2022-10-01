@@ -15,8 +15,8 @@ public class BaseballNumberTest {
     @DisplayName("같은 값을 가진 두 BaseballNumber 객체를 비교한다.")
     void equals_baseballNumber_boolean(int number1, int number2, boolean expected) {        
         // when
-        BaseballNumber baseballNumber1 = new BaseballNumber(number1);
-        BaseballNumber baseballNumber2 = new BaseballNumber(number2);
+        BaseballNumber baseballNumber1 = BaseballNumber.from(number1);
+        BaseballNumber baseballNumber2 = BaseballNumber.from(number2);
         
         // then
         assertThat(baseballNumber1.equals(baseballNumber2))
@@ -29,7 +29,7 @@ public class BaseballNumberTest {
     void new_outOfRange_exception(int number) {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> new BaseballNumber(number))
+                .isThrownBy(() -> BaseballNumber.from(number))
                 .withMessageMatching(
                         ErrorMessage.BASEBALL_NUMBER_OUT_OF_RANGE_ERROR.getMessage().replace("%d", "\\d+"));
     }

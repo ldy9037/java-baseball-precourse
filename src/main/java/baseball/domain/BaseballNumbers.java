@@ -24,7 +24,7 @@ public class BaseballNumbers {
         List<BaseballNumber> baseballNumberList = new ArrayList<>();
 
         for (char number : baseNumbers.toCharArray()) {
-            baseballNumberList.add(new BaseballNumber(Character.getNumericValue(number)));
+            baseballNumberList.add(BaseballNumber.from(Character.getNumericValue(number)));
         }
 
         return new BaseballNumbers(baseballNumberList);

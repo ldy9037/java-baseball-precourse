@@ -2,6 +2,8 @@ package baseball.domain;
 
 import java.util.Objects;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 public class BaseballNumber {
     
     public static final int MINIMUM_NUMBER = 1;
@@ -9,9 +11,18 @@ public class BaseballNumber {
 
     private final int number;
 
-    public BaseballNumber(int number) {
+    private BaseballNumber(int number) {
         validate(number);
         this.number = number;
+    }
+
+    public static BaseballNumber from(int number) {
+        return new BaseballNumber(number);
+    }
+
+    public static BaseballNumber newRandomNumber() {
+        int random = Randoms.pickNumberInRange(MINIMUM_NUMBER, MAXIUM_NUMBER);
+        return new BaseballNumber(random);
     }
 
     private void validate(int number) {

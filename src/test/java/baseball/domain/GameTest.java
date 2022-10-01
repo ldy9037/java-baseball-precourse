@@ -24,4 +24,15 @@ public class GameTest {
         // then 
         assertThat(gameStatus).isEqualTo(GameStatus.IN_PROGRESS);
     }
+
+    @Test
+    @DisplayName("힌트를 확인한다.")
+    void getHint_hint() {
+        // when
+        Hint hint = game.getHint(BaseballNumbers.from("123"));
+        
+        // then
+        assertThat(hint.getMessage()).isInstanceOf(String.class);
+    } 
+
 }

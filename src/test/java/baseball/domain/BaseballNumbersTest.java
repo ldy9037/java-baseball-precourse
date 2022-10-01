@@ -62,7 +62,7 @@ public class BaseballNumbersTest {
         List<BaseballNumber> result = new ArrayList<>();
 
         for (int i = 1; i <= size; i++) {
-            result.add(new BaseballNumber(i));
+            result.add(BaseballNumber.from(i));
         }
 
         return result;
