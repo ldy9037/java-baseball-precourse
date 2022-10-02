@@ -22,6 +22,11 @@ public class MainController {
     }
 
     private void requestHint(BaseballNumbers playerNumbers) {
+        MainView.printHint(game.getHint(playerNumbers));
+        
+        if (isInProgress()) {
+            requestBaseballNumbersForm();
+        }
     }
 
     private void startValidate() {
