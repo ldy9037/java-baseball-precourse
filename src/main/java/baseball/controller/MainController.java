@@ -29,6 +29,38 @@ public class MainController {
         if (isInProgress()) {
             requestBaseballNumbersForm();
         }
+        
+        if (isFinished()) {
+            requestContinueForm();
+        }
+    }
+
+    public void requestContinue(ContinueKey continueKey) {
+        if (continueKey.equals(ContinueKey.START)) {
+            restart();
+        }
+
+        if (continueKey.equals(ContinueKey.QUIT)) {
+            quit();
+        }
+    }
+
+    private void requestContinueForm() {
+        MainView.continueForm(this);
+    }
+
+    private void restart() {
+        initialized();
+        start();
+    }
+
+    private void initialized() {
+        game = null;
+    }
+
+    private void quit() {
+        MainView.printQuit();
+        System.exit(0);
     }
 
     private void startValidate() {
@@ -39,10 +71,14 @@ public class MainController {
     }
 
     private boolean isInProgress() {
-        return (!isNull() && game.getStatus() == GameStatus.IN_PROGRESS);
+        return (!hasInitialized() && game.getStatus() == GameStatus.IN_PROGRESS);
     }
 
-    private boolean isNull() {
+    private boolean isFinished() {
+        return (!hasInitialized() && game.getStatus() == GameStatus.FINISHED);
+    }
+
+    private boolean hasInitialized() {
         return (game == null);
     }   
 }

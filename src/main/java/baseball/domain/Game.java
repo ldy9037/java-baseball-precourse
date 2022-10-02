@@ -8,6 +8,8 @@ import org.assertj.core.util.Lists;
 public class Game {
     
     private final BaseballNumbers computerNumbers = generateBaseballNumbers();
+    private final Judgment answerJudgment = new StrikeJudgment(computerNumbers, computerNumbers);
+
     private GameStatus gameStatus = GameStatus.IN_PROGRESS;
 
     public GameStatus getStatus() {
@@ -15,7 +17,15 @@ public class Game {
     }
 
     public Hint getHint(BaseballNumbers playerNumbers) {
-        return Hint.of(computerNumbers, playerNumbers);
+        Hint hint = Hint.of(computerNumbers, playerNumbers);
+        checkAnswer(hint);
+        return hint;
+    }
+
+    private void checkAnswer(Hint hint) {
+        if (hint.contains(answerJudgment)) {
+            gameStatus = GameStatus.FINISHED;
+        }
     }
 
     private BaseballNumbers generateBaseballNumbers() {
