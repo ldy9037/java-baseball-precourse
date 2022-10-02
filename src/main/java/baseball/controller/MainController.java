@@ -3,6 +3,7 @@ package baseball.controller;
 import baseball.domain.BaseballNumbers;
 import baseball.domain.Game;
 import baseball.domain.GameStatus;
+import baseball.domain.Hint;
 import baseball.view.MainView;
 
 public class MainController {
@@ -18,11 +19,12 @@ public class MainController {
     }
 
     private void requestBaseballNumbersForm() {
-        requestHint(MainView.baseballNumbersForm());
+        MainView.baseballNumbersForm(this);
     }
 
-    private void requestHint(BaseballNumbers playerNumbers) {
-        MainView.printHint(game.getHint(playerNumbers));
+    public void requestHint(BaseballNumbers playerNumbers) {
+        Hint model = game.getHint(playerNumbers);
+        MainView.printHint(model);
         
         if (isInProgress()) {
             requestBaseballNumbersForm();
