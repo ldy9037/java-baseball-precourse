@@ -21,6 +21,28 @@ public class Hint {
         return String.join(" ", resultList).trim();
     }
 
+    public boolean contains(Judgment computerJudgment) {
+        boolean result = false;
+
+        for (Judgment judgment : judgments) {
+            result = equals(judgment, computerJudgment) ? true : result;
+        }
+
+        return result;
+    }
+
+    private boolean equals(Judgment judgment, Judgment computerJudgment) {
+        return (isSameCount(judgment, computerJudgment) && isSameResult(judgment, computerJudgment));
+    }
+
+    private boolean isSameResult(Judgment judgment, Judgment computerJudgment) {
+        return judgment.getResult().equals(computerJudgment.getResult());
+    }
+
+    private boolean isSameCount(Judgment judgment, Judgment computerJudgment) {
+        return (judgment.getCount() == computerJudgment.getCount());
+    }
+
     private List<String> convertResultList() {
         List<String> result = new ArrayList<>();
         

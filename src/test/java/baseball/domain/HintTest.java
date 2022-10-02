@@ -3,6 +3,7 @@ package baseball.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,5 +18,19 @@ public class HintTest {
 
         // then 
         assertThat(hint.getMessage()).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("특정 상태의 Judgment를 포함하고 있는지 확인한다.")
+    void getJudgmentCount_judgment() {
+        // given
+        BaseballNumbers computerNumbers = BaseballNumbers.from("123");
+        
+        // when 
+        Hint hint = Hint.of(computerNumbers, computerNumbers);
+        Judgment answer = new StrikeJudgment(computerNumbers, computerNumbers);
+
+        // when 
+        assertThat(hint.contains(answer)).isTrue();   
     }
 }
